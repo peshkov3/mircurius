@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+
 class HomeController extends Controller {
 
 	/*
@@ -30,9 +31,17 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-	    
+        $client = new \GuzzleHttp\Client();
         
-		return view('home');
+        $res = $client->get('https://www.sima-land.ru/api/v2/category');
+        
+        $res->getStatusCode();
+        // "200"
+       $res->getHeader('content-type');
+        // 'application/json; charset=utf8'
+        dd($res);
+        
+   		return view('home');
 	}
 
 }
