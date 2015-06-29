@@ -31,15 +31,26 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-        $client = new \GuzzleHttp\Client();
+	    
+
+try
+{
+    $output = file_get_contents('https://www.sima-land.ru/api/v2/item');
+   $output=json_decode($output);
+   
+    dd($output->items);
         
-        $res = $client->get('https://www.sima-land.ru/api/v2/category');
+    
+}
+catch(Exception $e)
+{
+    
+    dd($e);
+    // learn more about that exception
+}
         
-        $res->getStatusCode();
-        // "200"
-       $res->getHeader('content-type');
-        // 'application/json; charset=utf8'
-        dd($res);
+       
+
         
    		return view('home');
 	}
