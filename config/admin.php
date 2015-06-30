@@ -14,6 +14,10 @@ return [
         'model' => 'Pingpong\Admin\Entities\Article',
         'perpage' => 10
     ],
+    'product' => [
+        'model' => 'App\Mircurius\Models\Products',
+        'perpage' => 10
+    ],
     'page' => [
         'perpage' => 10
     ],
@@ -30,7 +34,7 @@ return [
         'perpage' => 10
     ],
     'category' => [
-        'model' => 'Pingpong\Admin\Entities\Category',
+        'model' => 'App\Mircurius\Models\Category',
         'perpage' => 10
     ],
 ];

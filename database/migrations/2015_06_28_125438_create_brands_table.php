@@ -12,11 +12,7 @@ class CreateBrandsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('brands', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->timestamps();
-		});
+        Schema::connection('mongodb')->create('brands');
 	}
 
 	/**
@@ -26,7 +22,7 @@ class CreateBrandsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('brands');
+        Schema::connection('mongodb')->create('brands');
 	}
 
 }
