@@ -29,7 +29,6 @@ class UpdateCategoryTable extends Command
         try {
 
             $page = 1;
-
             do {
                 $output = file_get_contents('https://www.sima-land.ru/api/v2/category?page=' . $page . '&per_page=50');
                 $output = json_decode($output);
