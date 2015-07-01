@@ -75,7 +75,18 @@ return [
 			'schema'   => 'public',
 		],
 
-		'sqlsrv' => [
+
+
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGODB_HOST', 'localhost'),
+            'port'     => 27017,
+            'username' => env('MONGODB_USERNAME', 'hermes'),
+            'password' => env('MONGODB_PASSWORD', 'hermes'),
+            'database' => env('MONGODB_DATABASE', 'hermes'),
+        ],
+
+        'sqlsrv' => [
 			'driver'   => 'sqlsrv',
 			'host'     => env('DB_HOST', 'localhost'),
 			'database' => env('DB_DATABASE', 'forge'),

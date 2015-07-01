@@ -12,11 +12,7 @@ class CreateCategiriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categiries', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->timestamps();
-		});
+        Schema::connection('mongodb')->create('categories');
 	}
 
 	/**
@@ -26,7 +22,7 @@ class CreateCategiriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('categiries');
+        Schema::connection('mongodb')->create('categories');
 	}
 
 }
