@@ -16,7 +16,10 @@ return [
 	'paths' => [
 		realpath(base_path('resources/views'))
 	],
-
+	
+    'layout' => 'layout.master',
+     
+   
 	/*
 	|--------------------------------------------------------------------------
 	| Compiled View Path

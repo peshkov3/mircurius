@@ -1,21 +1,19 @@
-<link href="{!! admin_asset('components/bootstrap/dist/css/bootstrap.min.css') !!}" rel="stylesheet" type="text/css"/>
-<link href="{!! admin_asset('components/fontawesome/css/font-awesome.min.css') !!}" rel="stylesheet"
-type="text/css"/>
-<!-- Ionicons -->
-<link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
-<!-- Morris chart -->
-<link href="{!! admin_asset('adminlte/css/morris/morris.css') !!}" rel="stylesheet" type="text/css"/>
-<!-- jvectormap -->
-<link href="{!! admin_asset('adminlte/css/jvectormap/jquery-jvectormap-1.2.2.css') !!}" rel="stylesheet" type="text/css"/>
-<!-- Date Picker -->
-<link href="{!! admin_asset('adminlte/css/datepicker/datepicker3.css') !!}" rel="stylesheet" type="text/css"/>
-<!-- Daterange picker -->
-<link href="{!! admin_asset('adminlte/css/daterangepicker/daterangepicker-bs3.css') !!}" rel="stylesheet" type="text/css"/>
-<!-- bootstrap wysihtml5 - text editor -->
-<link href="{!! admin_asset('adminlte/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') !!}" rel="stylesheet" type="text/css"/>
-<!-- Theme style -->
-<link href="{!! admin_asset('adminlte/css/AdminLTE.css') !!}" rel="stylesheet" type="text/css"/>
-
+    <link href="{!! asset('css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/font-awesome.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/prettyPhoto.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/price-range.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/animate.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/main.css') !!}" rel="stylesheet">
+    <link href="{!! asset('css/responsive.css') !!}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{!! asset('images/ico/favicon.ico') !!}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{!! asset('images/ico/apple-touch-icon-144-precomposed.png') !!}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{!! asset('images/ico/apple-touch-icon-114-precomposed.png') !!}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{!! asset('images/ico/apple-touch-icon-72-precomposed.png') !!}">
+    <link rel="apple-touch-icon-precomposed" href="{!! asset('images/ico/apple-touch-icon-57-precomposed.png') !!}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
