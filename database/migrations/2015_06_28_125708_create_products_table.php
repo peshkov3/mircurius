@@ -12,22 +12,9 @@ class CreateProductsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('products', function(Blueprint $table)
-		{
-			$table->increments('id');
-            $table->bigInteger('product_id');c
-             $table->char('sid',60);c
-              $table->bigInteger('type_id');c
-               $table->bigInteger('has_discount');c
-               
-               
-                $table->boolean('is_disabled');c
-                 $table->string('price');c
-                  $table->bigInteger('product_id');c 
-                  $table->bigInteger('product_id');c
-			$table->timestamps();
-            
-		});
+
+        Schema::connection('mongodb')->create('products');
+
 	}
 
 	/**
@@ -37,7 +24,7 @@ class CreateProductsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('products');
+        Schema::connection('mongodb')->drop('products');
 	}
 
 }

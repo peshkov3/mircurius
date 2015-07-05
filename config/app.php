@@ -148,6 +148,13 @@ return [
         
         'Pingpong\Admin\Providers\SupportServiceProvider',
         'Pingpong\Admin\AdminServiceProvider',
+        'Jenssegers\Mongodb\MongodbServiceProvider',
+
+        'App\Mircurius\Repositories\Product\ProductRepositoryServiceProvider',
+        'App\Mircurius\Repositories\Category\CategoryRepositoryServiceProvider',
+        'App\Mircurius\Repositories\Brand\BrandRepositoryServiceProvider',
+
+
 	],
 
 	/*
