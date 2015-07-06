@@ -154,7 +154,8 @@ return [
         'App\Mircurius\Repositories\Category\CategoryRepositoryServiceProvider',
         'App\Mircurius\Repositories\Brand\BrandRepositoryServiceProvider',
         
-        'App\Mircurius\Providers\MircuriusServiceProvider'
+        'App\Mircurius\Providers\MircuriusServiceProvider',
+      
 
 
 	],
@@ -204,6 +205,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		
+
 
 	],
 

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a49b333fa21c55895aade10d52c220a",
+    "hash": "bb3546e70eeb1c48bbd6da384e1bb496",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -953,6 +953,48 @@
                 }
             ],
             "time": "2015-05-06 14:23:37"
+        },
+        {
+            "name": "lavary/laravel-menu",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lavary/laravel-menu.git",
+                "reference": "96417ddf8c3525de55d5bafd50219c63d2e780a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lavary/laravel-menu/zipball/96417ddf8c3525de55d5bafd50219c63d2e780a6",
+                "reference": "96417ddf8c3525de55d5bafd50219c63d2e780a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.2",
+                "illuminate/view": ">=4.2",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Lavary\\Menu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lavary",
+                    "email": "mrl.8081@gmail.com"
+                }
+            ],
+            "description": "A quick way to create menus in Laravel 4",
+            "homepage": "https://github.com/lavary/laravel-menu",
+            "keywords": [
+                "laravel"
+            ],
+            "time": "2015-02-23 21:52:20"
         },
         {
             "name": "league/flysystem",
@@ -3526,7 +3568,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "lavary/laravel-menu": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

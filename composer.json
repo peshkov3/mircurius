@@ -9,7 +9,8 @@
 		 "intervention/image": "~2",
 		"pingpong/admin": "~2.0",
 		"guzzlehttp/guzzle": "~6.0",
-		"jenssegers/mongodb": "^2.1"
+		"jenssegers/mongodb": "^2.1",
+		  "lavary/laravel-menu": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

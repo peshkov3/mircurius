@@ -4,7 +4,7 @@ $leftMenu = Menu::instance('admin-menu');
 
 $rightMenu = Menu::instance('admin-menu-right');
 
-
+$shopMenu = Menu::instance('shop-menu');
 
 /**
  * @see https://github.com/pingpong-labs/menus

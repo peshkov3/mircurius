@@ -6,6 +6,9 @@ use App\Mircurius\Repositories\Product\ProductRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Input;
+
+use App\Mircurius\Models\Category;
 
 class HomeController extends Controller
 {
@@ -45,18 +48,45 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function getIndex()
     {
-$curl = curl_init('https://www.sima-land.ru/api/v2/item/577397?expand=photo');
-
-curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$json = curl_exec($curl);
-curl_close($curl);
-       dd($json);
         return view('index');
     }
 
+   public function getCategory()
+    {
+      $curl = curl_init('https://www.sima-land.ru/api/v2/category?slug=suveniry');
+curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+ curl_setopt($curl, CURLOPT_PORT , 8089);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+$json = curl_exec($curl);
 
+
+
+    
+curl_close($curl);
+dd($json);
+
+// close cURL resource, and free up system resources
+curl_close($ch);
+    
+    
+$json = curl_exec($curl);
+  dd($json);      
+curl_close($curl);
+
+        $id =  Input::get('id');
+        $v = Validator::make(['id' => $id], ['id' => 'required|integer']);
+
+        if ($v->fails()) abort(400);
+        
+       $root_category = Category::where('id', (int)$id)->get();
+       
+       dd( $root_category->toArray() );
+        
+       $categories = Category::where('root_id', (int)$id)->get();
+        
+       return view('category.index', ['categoruies'=>$categories]); 
+    }
 
 }

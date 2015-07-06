@@ -28,10 +28,12 @@ class CategoryUpdate extends Command
 
     protected function getResponse($url){
         $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));    
+        curl_setopt($curl, CURLOPT_PORT , 8089);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec($curl);
         curl_close($curl);
+         dd($json);
         return (array)json_decode($json);
     }
 
@@ -41,15 +43,20 @@ class CategoryUpdate extends Command
         try {
 
             DB::connection('mongodb')->table('categories')->delete();
+            DB::connection('mongodb')->table('products')->delete();
+            
+            $categories = config('frontend.categories.items');
 
-            $categories = config('category.categories');
+            foreach ($categories as $key=> $category_dev_name) {
 
-            foreach ($categories as $category_dev_name) {
-
-                $categories = $this->getResponse('https://www.sima-land.ru/api/v2/category?slug='. $category_dev_name);
+                $categories = $this->getResponse('https://www.sima-land.ru/api/v2/category?slug=suveniry');
+                dd($category_dev_name);
                 $category = $categories['items'];
                 $category = (array)$category;
                 $category = $category[0];
+                
+              
+                  
 
                 if (isset($category->id))
                     $this->saveCategory($category->id);
@@ -113,7 +120,7 @@ class CategoryUpdate extends Command
                 }
             else {
                 \Illuminate\Support\Facades\Log::info('There is no category');
-                $this->comment(date("There is no category"));
+                $this->comment("There is no category");
                 dd('There is no category in first level');
             }
         }
@@ -142,7 +149,7 @@ class CategoryUpdate extends Command
         if ($pageCount > 1) {
 
             do {
-                $categories = $this->getResponse('https://www.sima-land.ru/api/v2/category?children=' . $id . '&page=' . $pageCount . '&per_page=50');
+                $categories = $this->getResponse('https://www.sima-land.ru/api/v2/category?expand=photo&children=' . $id . '&page=' . $pageCount . '&per_page=50');
                 $categories = $categories['items'];
                 if (count($categories) != 0) {
                     foreach ($categories as $category) {
@@ -194,11 +201,12 @@ class CategoryUpdate extends Command
         if ($pageCount > 1)
         {
             do{
-                $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?category_id=' . $category_id. '&page=' . $pageCount . '&per_page=50');
+                $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?expand=photo&category_id=' . $category_id. '&page=' . $pageCount . '&per_page=50');
                 $products = $products['items'];
 
                 if (count($products) != 0){
                     foreach ($products as $product) {
+                     
                         $this->product->create((array)$product);
                     }
 
@@ -212,7 +220,9 @@ class CategoryUpdate extends Command
         }else {
             if (count($products) != 0){
                 foreach ($products as $product) {
-
+                        
+                        
+                  
                     $this->product->create((array)$product);
                 }
             }else {
