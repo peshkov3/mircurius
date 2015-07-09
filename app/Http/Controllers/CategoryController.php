@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Mircurius\Models\Product;
 use App\Mircurius\Repositories\Category\CategoryRepository;
 use App\Mircurius\Repositories\Product\ProductRepository;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,7 @@ use Input;
 
 use App\Mircurius\Models\Category;
 
-class HomeController extends Controller
+class CategoryController extends Controller
 {
 
     /*
@@ -53,6 +54,36 @@ class HomeController extends Controller
         return view('index');
     }
 
+    public function getCategory()
+    {
 
+        $id =  Input::get('id');
+
+        $v = Validator::make(['id' => $id], ['id' => 'required|integer']);
+
+        if ($v->fails()) abort(400);
+
+
+        return view('category.index', [
+            'root_category'=>Category::where('id', (int)$id)->get()->first(),
+            'categoruies'=> Category::where('root_id', (int)$id)->orderBy('name', 'DESC')->paginate(20)
+        ]);
+    }
+
+    public function getView()
+    {
+
+        $id =  Input::get('id');
+
+        $v = Validator::make(['id' => $id], ['id' => 'required|integer']);
+
+        if ($v->fails()) abort(400);
+
+
+        return view('category.index', [
+            'root_category'=>Product::where('id', (int)$id)->get()->first(),
+            'categoruies'=> Category::where('root_id', (int)$id)->orderBy('name', 'DESC')->paginate(20)
+        ]);
+    }
 
 }

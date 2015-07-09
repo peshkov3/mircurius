@@ -20,26 +20,26 @@
 
                     {!! $categoruies->appends(['id' =>$root_category->id ])->render(new  App\Mircurius\Presenters\CategoryPaginationPresenter($categoruies))  !!}
 
+                </div>
+
             </div>
-
         </div>
-    </div>
 
 
 
 
 
 
-    <div class="brands-name">
-        <ul class="nav nav-pills nav-stacked">
-            @foreach($categoruies as $category)
-                <li><a href="{{url('category',$category->id)}}">{!! $category->name !!}</a></li>
-                <li class="pull-right"><a href="https://github.com/bbilginn/bootstrap-duallist" target="_blank"></a>
-                </li>
-            @endforeach
+        <div class="brands-name">
+            <ul class="nav nav-pills nav-stacked">
+                @foreach($categoruies as $category)
+                    <li><a href="{{url('category',$category->id)}}">{!! $category->name !!}</a></li>
+                    <li class="pull-right"><a href="https://github.com/bbilginn/bootstrap-duallist" target="_blank"></a>
+                    </li>
+                @endforeach
 
-        </ul>
-    </div>
+            </ul>
+        </div>
     </div><!--features_items-->
     <div class="category-tab"><!--category-tab-->
         <div class="col-sm-12">

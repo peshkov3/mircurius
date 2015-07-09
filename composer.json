@@ -10,7 +10,8 @@
 		"pingpong/admin": "~2.0",
 		"guzzlehttp/guzzle": "~6.0",
 		"jenssegers/mongodb": "^2.1",
-		  "lavary/laravel-menu": "dev-master"
+		  "lavary/laravel-menu": "dev-master",
+		"landish/pagination": "^1.3"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

@@ -12,7 +12,7 @@
 */
 Route::get('/',  ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
-Route::get('category',  ['as' => 'home.category', 'uses' => 'HomeController@getCategory']);
+Route::get('category',  ['as' => 'get.category', 'uses' => 'CategoryController@getCategory']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
