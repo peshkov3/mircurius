@@ -146,6 +146,10 @@ return [
 		'App\Providers\RouteServiceProvider',
 		
         
+          'Intervention\Image\ImageServiceProvider',
+               'Collective\Html\HtmlServiceProvider',
+		
+        
         'Pingpong\Admin\Providers\SupportServiceProvider',
         'Pingpong\Admin\AdminServiceProvider',
         'Jenssegers\Mongodb\MongodbServiceProvider',
@@ -155,7 +159,8 @@ return [
         'App\Mircurius\Repositories\Brand\BrandRepositoryServiceProvider',
         
         'App\Mircurius\Providers\MircuriusServiceProvider',
-      
+        'App\Mircurius\Providers\ObserverServiceProvider',
+     
 
 
 	],
@@ -179,7 +184,7 @@ return [
 		'Blade'     => 'Illuminate\Support\Facades\Blade',
 		'Bus'       => 'Illuminate\Support\Facades\Bus',
 		'Cache'     => 'Illuminate\Support\Facades\Cache',
-		'Config'    => 'Illuminate\Support\Facades\Config',
+		'Config'    => 'Illuminate\Support\Facades\Confi',
 		'Cookie'    => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'     => 'Illuminate\Support\Facades\Crypt',
 		'DB'        => 'Illuminate\Support\Facades\DB',
@@ -206,8 +211,9 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		
-
-
+	    'Form'      => 'Collective\Html\FormFacade',
+        'Html'      => 'Collective\Html\HtmlFacade',
+        'Image'     => 'Intervention\Image\Facades\Image',
 	],
 
 ];

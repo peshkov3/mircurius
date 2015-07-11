@@ -1,15 +1,22 @@
 <?php namespace App\Commands;
+
 use App\Mircurius\Repositories\Category\CategoryRepository;
 use App\Mircurius\Repositories\Product\ProductRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
+
 class CategoryUpdate extends Command
 {
-    protected $name = 'category-update';
+    protected $name = 'update-db';
     protected $description = 'Update categories from the main server';
+    
+    
     private $category;
     private $product;
+    
+    
     public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
         parent::__construct();
@@ -34,6 +41,15 @@ class CategoryUpdate extends Command
     public function handle()
     {
         try {
+            
+            $this->product->create([
+            'sid'=>'894951',
+            'photo' => [ 
+            'base_url'=> 'url',
+            'indexes'=> [0,1]
+            ]]);            
+            dd('Not work');
+            
             DB::connection('mongodb')->table('categories')->delete();
             DB::connection('mongodb')->table('products')->delete();
             
