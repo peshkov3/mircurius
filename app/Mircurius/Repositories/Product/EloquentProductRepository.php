@@ -72,6 +72,7 @@ class EloquentProductRepository implements ProductRepository
 
     public function create(array $data)
     {
+        
         return $this->getModel()->create($data);
     }
 }
