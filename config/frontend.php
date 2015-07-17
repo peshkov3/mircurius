@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'view'=>[
+        'layout'=>'layout.frontend_layout'
+    ],
     'prefix' => 'frontend',
     'filter' => [
         'auth' => 'admin.auth',

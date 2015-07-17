@@ -1,4 +1,4 @@
-@extends($layout)
+@extends($frontend_layout)
 
 @section('content-header')
     <h1>

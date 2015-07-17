@@ -4,8 +4,8 @@ class LayoutComposer
 {
     public function compose($view)
     {
-    	$layout = config('view.layout', 'layouts.master');
+        $frontend_layout = config('frontend.view.layout', 'layout.frontend_layout');
 
-        $view->with(compact('layout'));
+        $view->with(compact('frontend_layout'));
     }
 }
