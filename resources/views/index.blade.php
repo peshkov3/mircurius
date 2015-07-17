@@ -11,6 +11,15 @@
 
 @section('content')
 
+    <div class="col-sm-3">
+
+        @include('partials.sidebar')
+        @yield('sidebar')
+
+    </div>
+
+    <div class="col-sm-9 padding-right">
+
        <div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
 						<div class="col-sm-4">
@@ -550,6 +559,8 @@
                               </a>          
                         </div>
                     </div><!--/recommended_items-->
+
+        </div>
             @stop
 
 @section('script')
