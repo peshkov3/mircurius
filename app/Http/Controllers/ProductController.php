@@ -55,9 +55,10 @@ class ProductController extends Controller
 
         if ($v->fails()) abort(400);
 
-        dd($this->product->findByProductId($id)->category);
+    //    dd($this->product->findByProductId($id)->);
 
         return view('product.view', [
+          //  "category" =>
             'product'=>  $this->product->findByProductId($id)
         ]);
     }
