@@ -10,7 +10,7 @@ return [
         'guest' => 'admin.guest',
     ],
     'categories'=>[
-        'items'=>['suveniry','igrushki','tovary-dlya-detey','knigi', 'prazdniki'],
+        'items'=>['igrushki','tovary-dlya-detey','knigi'],
         'config' =>[
             'suveniry'=>[
                 'id'=>'2851',
@@ -52,11 +52,7 @@ return [
     ],
     'product' => [
         'model' => 'App\Mircurius\Models\Product',
-        'perpage' => 10
-    ],
-    'product' => [
-        'model' => 'App\Mircurius\Models\Brand',
-        'perpage' => 10
+        'perpage' => 9
     ],
     'category' => [
         'model' => 'App\Mircurius\Models\Category',

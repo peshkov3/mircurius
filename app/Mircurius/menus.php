@@ -6,6 +6,6 @@ Menu::create('shop-menu', function ($menu) {
     $categories=config('frontend.categories.config');
     
     foreach($categories as $value){
-          $menu->route('get.category', $value['name_ru'], ['id'=>$value['id']], 0, ['icon' => $value['icon']]);
+          $menu->route('category.list', $value['name_ru'], ['id'=>$value['id']], 0, ['icon' => $value['icon']]);
     }
 });

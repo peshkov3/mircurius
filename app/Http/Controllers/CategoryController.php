@@ -54,19 +54,21 @@ class CategoryController extends Controller
         return view('index');
     }
 
-    public function getCategory()
+    public function getList($one)
     {
 
-        $id =  Input::get('id');
+        $id =  $one;
 
         $v = Validator::make(['id' => $id], ['id' => 'required|integer']);
 
         if ($v->fails()) abort(400);
 
+        $root_category = Category::where('id', (int)$id)->get()->first();
+
 
         return view('category.index', [
-            'root_category'=>Category::where('id', (int)$id)->get()->first(),
-            'categoruies'=> Category::where('root_id', (int)$id)->orderBy('name', 'DESC')->paginate(20)
+            'root_category'=>$root_category,
+            'categories'=> Category::where('root_id', (int)$id)->where('slug','!=', $root_category->slug)->orderBy('name', 'DESC')->paginate(20)
         ]);
     }
 

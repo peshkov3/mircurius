@@ -8,6 +8,13 @@ class Product extends Model {
     protected $connection = 'mongodb';
 
     protected $guarded = ['_id'];
+
     public $timestamps = false;
+
+
+    public function category()
+    {
+        return $this->belongsTo('\App\Mircurius\Models\Category', 'category_id', 'root_id');
+    }
 
 }

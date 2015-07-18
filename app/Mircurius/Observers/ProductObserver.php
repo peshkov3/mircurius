@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Input;
 use Image;
+use Exception;
 
 class ProductObserver{
 
-
+    protected $model;
     protected $username = 'peshkov-maximum@yandex.ru';
     protected $password = '786ZS4';
-    protected $saveImgDir = 'mircurius/img';
+    protected $saveImgDir = 'public/mircurius/img';
+    protected $images = [];
 
 
     public function creating($model)
@@ -23,19 +25,27 @@ class ProductObserver{
         if (isset($model->sid))
         {
             if (isset($model->photo)) {
-           
-                     $this->getImageBySID($model);
+
+                $this->model=$model;
+
+                $this->getImagesBySID($model);
+
+                $model->photo = $this->images;
+
+                $this->images = [];
             } else {
-                 $this->log('There is no photo parametr in Product');
+
+                $this->log('There is no photo parametr in Product');
+
             }
-       
+
         }
         else {
             $this->log('There is no sid parametr in Product');
         }
-        
+
     }
-    
+
     public function saving($model)
     {
         //
@@ -45,104 +55,112 @@ class ProductObserver{
     {
         //
     }
-    
-    protected function getImageBySID($model){
-        
+
+    protected function getImagesBySID($model){
+
         $sid=$model->sid;
-        
-         $v = Validator::make([
+
+        $v = Validator::make([
             'id' => $sid
         ], [
             'id' => 'required|integer']);
-            
+
         if ($v->fails()) dd('wrong sid ='. $sid);
-        
-        $image = $this->getResponse( 'https://www.sima-land.ru/api/GetImageSource?id='.$sid.'&n=0&username='.$this->username.'&password='.$this->password);
-        
-        if ($image!=false) $this->saveImage($sid, $image);
-    }
-    
-    protected function saveImage($sid,$image){
-        
-           $image = Image::make($image);
-           
-           $image->save('public/bar.jpg');
-           
-           $image->fit(140, 140)->save('public/bar_140.jpg');
-           
-           $image->fit(240, 240)->save('public/bar_240.jpg');
-    
-           $image_extension  = $image->getClientOriginalExtension();
-         
-           // check the directory mircurius/img
-           if (!File::exists($this->saveImgDir)) {
-                File::makeDirectory($this->saveImgDir);
-           }
-           
-           $originalDir = $this->saveImgDir.'/origanals/products/'.$sid;
-           // check the directory origanals
-           if (!File::exists($originalDir)) {
-                File::makeDirectory($originalDir);
-           }
-           
-           $thumbDir = $this->saveImgDir.'/thumb/products';
-            // check the directory thumb
-           if (!File::exists($thumbDir)) {
-                File::makeDirectory($thumbDir);
-           }
-           
-           // configure original path
-           $originalDir=$originalDir.'/'.$sid;
-         
-            if (!File::exists($dir)) {
-                chmod($dir, 0777);
-                File::makeDirectory($dir);
-                $image->fit(480, 360)->save($path_to_file);
-                $video->image = $path_to_file;
-            } else {
-                File::delete($path_to_file);
-                $image->fit(480, 360)->save($path_to_file);
-                $video->image = $path_to_file;
+
+        if (isset($model->photo->indexes)){
+
+            $indexes = (array)$model->photo;
+
+            foreach($indexes['indexes'] as $index=>$value){
+
+                $image = $this->getResponse( 'https://www.sima-land.ru/api/GetImageSource?id='.$sid.'&n='.(int)$index.'&username='.$this->username.'&password='.$this->password);
+
+                if ($image!=false) $this->saveImages($image, (int)$sid, (int)$index);else ($this->log('There is no photo with such index sid = '.$sid));
             }
-         
-              dd($image_extension);
-            $image = Image::make($image);
-            
-            $dir = 'mircurius/img/original/products/'.$sid;
-            dd($dir);
-            $path_to_file = $dir . '/high.' . $image_extension;
-            
-            $dir_video='images/thumb/video';
-            if (!File::exists($dir_video)) {
-                File::makeDirectory($dir_video);
-           }
-            
-        
-      
+
+        } else {
+
+            dd('there is no photo -indexes');
+        }
     }
-    
-    
-     protected function getResponse($url){
-       
+
+    protected function saveImages($image, $sid, $index){
+
+        $v = Validator::make([
+            'index' =>  $index,
+
+            'id' => $sid
+        ], [
+            'index' =>  'required|integer',
+
+            'id' => 'required|integer']);
+
+        if ($v->fails()) dd('wrong sid ='. $sid);
+
+
+        try{
+
+            $image = Image::make($image);
+
+
+            // check the directories
+            if (!File::exists($this->saveImgDir)) {File::makeDirectory($this->saveImgDir);}
+            if (!File::exists($this->saveImgDir.'/products')) {File::makeDirectory($this->saveImgDir.'/products');}
+            if (!File::exists($this->saveImgDir.'/products/'.$sid)) {File::makeDirectory($this->saveImgDir.'/products/'.$sid);}
+
+
+            // dir to save image
+            $dir=$this->saveImgDir.'/products/'.$sid.'/'.$index;
+
+            if (!File::exists($dir)) {
+                File::makeDirectory($dir);
+            }
+
+
+            // save original to file
+//            $image->save($dir.'/original.jpg');
+//            $this->images[$index]['original']= 'mircurius/img/products/'.$sid.'/'.$index.'/original.jpg';
+
+            // save medium
+            $image->fit(240,240)->save($dir.'/medium.jpg');
+            $this->images[$index]['medium']='mircurius/img/products/'.$sid.'/'.$index.'/medium.jpg';
+
+
+
+        }catch(Exception $e){
+
+            $error = (array)$image;
+
+            $this->log(json_encode($error));
+
+            $this->log($e);
+
+        }
+
+    }
+
+
+    protected function getResponse($url){
+
         do{
             $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));    
- 
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             $json = curl_exec($curl);
             curl_close($curl);
-           
-         }while($json==null||$json==false);
-                
+
+        }while($json==null||$json==false);
+
         return $json;
     }
-    
+
     protected function log($message){
-         \Illuminate\Support\Facades\Log::info('ProductObserver@error: '.$message);
-        
-    }   
- 
+        \Illuminate\Support\Facades\Log::info('ProductObserver@error: '.$message);
+
+    }
+
 
 
 }

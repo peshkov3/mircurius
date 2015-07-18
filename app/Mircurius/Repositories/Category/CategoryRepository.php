@@ -7,4 +7,7 @@ use App\Mircurius\Repositories\Repository;
 interface CategoryRepository extends Repository
 {
     public function getCategory();
+
+    public function findByRootId($id);
+
 }

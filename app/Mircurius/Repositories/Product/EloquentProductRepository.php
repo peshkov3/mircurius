@@ -2,7 +2,6 @@
 
 namespace App\Mircurius\Repositories\Product;
 
-use App\Mircurius\Models\Product;
 
 class EloquentProductRepository implements ProductRepository
 {
@@ -15,12 +14,12 @@ class EloquentProductRepository implements ProductRepository
     {
         $model = config('frontend.product.model');
         
-        return new Product();
+        return new $model();
     }
 
     public function getProduct()
     {
-        return $this->getModel()->onlyPost();
+        return $this->getModel();
     }
 
     public function allOrSearch($searchQuery = null)
@@ -44,8 +43,7 @@ class EloquentProductRepository implements ProductRepository
         return $this->getProduct()->where('title', 'like', $search)
             ->orWhere('body', 'like', $search)
             ->orWhere('id', '=', $searchQuery)
-            ->paginate($this->perPage())
-        ;
+            ->paginate($this->perPage());
     }
 
     public function findById($id)
@@ -57,6 +55,18 @@ class EloquentProductRepository implements ProductRepository
     {
         return $this->getProduct()->where($key, $operator, $value)->paginate($this->perPage());
     }
+
+    public function findByCategoryId($id)
+    {
+        return $this->getProduct()->where('category_id', (int)$id)->paginate($this->perPage());
+    }
+
+
+    public function findByProductId($id)
+    {
+        return $this->getProduct()->where('id', (int)$id)->get()->first();
+    }
+
 
     public function delete($id)
     {

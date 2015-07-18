@@ -1,11 +1,11 @@
 @extends($frontend_layout)
 
-@section('content-header')
-    <h1>
-        Dashboard
-        <small>Control panel</small>
-    </h1>
-@stop
+{{--@section('content-header')--}}
+    {{--<h1>--}}
+        {{--Dashboard--}}
+        {{--<small>Control panel</small>--}}
+    {{--</h1>--}}
+{{--@stop--}}
 
 
 

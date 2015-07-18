@@ -20,7 +20,7 @@ class EloquentCategoryRepository implements CategoryRepository
 
     public function getCategory()
     {
-        return $this->getModel()->onlyPost();
+        return $this->getModel();
     }
 
     public function allOrSearch($searchQuery = null)
@@ -51,6 +51,11 @@ class EloquentCategoryRepository implements CategoryRepository
     public function findById($id)
     {
         return $this->getCategory()->find($id);
+    }
+
+    public function findByRootId($id)
+    {
+        return $this->getCategory()->where('id', (int)$id)->get()->first();
     }
 
     public function findBy($key, $value, $operator = '=')
