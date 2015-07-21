@@ -23,7 +23,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -38,7 +38,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -53,7 +53,7 @@
                                 <h2>24 DEC 2014</h2>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="video-gallery text-center">
                                 <a href="#">
@@ -140,7 +140,7 @@
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -148,8 +148,8 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                    <p class="pull-left">Copyright © 2015 Mircurius Company All rights reserved.</p>
+                    <p class="pull-right"></p>
                 </div>
             </div>
         </div>

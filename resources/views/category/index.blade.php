@@ -20,13 +20,16 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-sx-12">
                     <div class="search_box pull-left">
-                        <input type="text" placeholder="Поиск категории">
+                        <form action="{{url('category/search')}}" method="GET">
+                            <input type="text" name="query" placeholder="Поиск категории">
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6 col-sx-12">
                     <div class="pull-right">
 
-                        {!! $categories->appends(['id' =>$root_category->id ])->render(new  App\Mircurius\Presenters\CategoryPaginationPresenter($categories))  !!}
+                        {!! $categories->appends(['id' =>$root_category->id ])->render(new
+                        App\Mircurius\Presenters\CategoryPaginationPresenter($categories)) !!}
 
                     </div>
 
@@ -38,15 +41,17 @@
                 <ul class="nav nav-pills nav-stacked">
                     @foreach($categories as $category)
                         <li><a href="{{url('product-by-category-id',$category->id)}}">{!! $category->name !!}</a></li>
-                        <li class="pull-right"><a href="https://github.com/bbilginn/bootstrap-duallist" target="_blank"></a>
+                        <li class="pull-right"><a href="https://github.com/bbilginn/bootstrap-duallist"
+                                                  target="_blank"></a>
                         </li>
                     @endforeach
 
                 </ul>
             </div>
-        </div><!--features_items-->
+        </div>
+        <!--features_items-->
     </div>
-    
+
 
 
 @stop

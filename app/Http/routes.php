@@ -11,6 +11,8 @@
 |
 */
 Route::get('/',  ['as' => 'home', 'uses' => 'HomeController@getIndex']);
+Route::get('about',  ['as' => 'home.about', 'uses' => 'HomeController@getAbout']);
+Route::get('contact',  ['as' => 'home.contact', 'uses' => 'HomeController@getContact']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -21,13 +23,11 @@ Route::controller('category', 'CategoryController', [
     'getList' => 'category.list',
 ]);
 
-Route::controller('home', 'CategoryController', [
-    'getIndex' => 'home' ,
-    'getGallery' => 'gallery' ,
-    'getAboutUs' => 'about' ,
-    'getContactUs' => 'contact',
-    'postContactUs' => 'post.contact'
-]);
+
+Route::get('category/search',  ['as' => 'category.search', 'uses' => 'CategoryController@getSearch']);
+Route::get('category/{id}',  ['as' => 'category.view', 'uses' => 'CategoryController@getProduct']);
 
 Route::get('product-by-category-id/{category_id}',  ['as' => 'product.category_id', 'uses' => 'ProductController@getProductByCategoryId']);
 Route::get('product/{id}',  ['as' => 'product.view', 'uses' => 'ProductController@getProduct']);
+Route::get('order/{id}',  ['as' => 'order.index', 'uses' => 'OrderController@getOrder']);
+

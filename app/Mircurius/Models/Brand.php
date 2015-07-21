@@ -1,13 +1,17 @@
 <?php namespace App\Mircurius\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Model;
 
-class Brand extends Model {
+class Brand extends  Model{
 
-	//
     protected $connection = 'mongodb';
 
     protected $guarded = ['_id'];
     public $timestamps = false;
 
+
+    public function products()
+    {
+        return $this->hasMany('\App\Mircurius\Models\Product', 'trademark_id', 'id');
+    }
 }

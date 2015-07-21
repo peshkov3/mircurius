@@ -15,7 +15,7 @@
     <div class="col-sm-9 padding-right">
 
         <div class="features_items"><!--features_items-->
-            <h2 class="title text-center"> {!! $category->name !!}</h2>
+            <h2 class="title text-center"> Наши продукты </h2>
 
             <div class="row hidden-lg hidden-md visible-xs visible-sm">
 
@@ -23,7 +23,7 @@
                 <div class="col-sm-12 col-sx-10">
                     <div class="pull-right">
 
-                        {!! $products->appends(['id' =>$category->id ])->render(new
+                        {!! $products->render(new
                         App\Mircurius\Presenters\CategoryPaginationPresenter($products)) !!}
 
                     </div>
@@ -44,7 +44,7 @@
                 <div class="col-lg-10 col-sm-10 col-sx-12">
                     <div class="pull-right">
 
-                        {!! $products->appends(['id' =>$category->id ])->render(new
+                        {!! $products->render(new
                         App\Mircurius\Presenters\CategoryPaginationPresenter($products)) !!}
 
                     </div>

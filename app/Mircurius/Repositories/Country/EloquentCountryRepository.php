@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Mircurius\Repositories\Brand;
+namespace App\Mircurius\Repositories\Country;
 
-class EloquentBrandRepository implements BrandRepository
+
+class EloquentCountryRepository implements CountryRepository
 {
     public function perPage()
     {
-        return config('frontend.brand.perpage');
+        return config('frontend.country.perpage');
     }
 
     public function getModel()
     {
-        $model = config('frontend.brand.model');
+        $model = config('frontend.product.model');
         
-        return new $model;
+        return new $model();
     }
 
-    public function getBrand()
+    public function getProduct()
     {
-        return $this->getModel()->onlyPost();
+        return $this->getModel();
     }
 
     public function allOrSearch($searchQuery = null)
@@ -32,29 +33,40 @@ class EloquentBrandRepository implements BrandRepository
 
     public function getAll()
     {
-        return $this->getBrand()->latest()->paginate($this->perPage());
+        return $this->getProduct()->latest()->paginate($this->perPage());
     }
 
     public function search($searchQuery)
     {
         $search = "%{$searchQuery}%";
         
-        return $this->getBrand()->where('title', 'like', $search)
+        return $this->getProduct()->where('title', 'like', $search)
             ->orWhere('body', 'like', $search)
             ->orWhere('id', '=', $searchQuery)
-            ->paginate($this->perPage())
-        ;
+            ->paginate($this->perPage());
     }
 
     public function findById($id)
     {
-        return $this->getBrand()->find($id);
+        return $this->getProduct()->find($id);
     }
 
     public function findBy($key, $value, $operator = '=')
     {
-        return $this->getBrand()->where($key, $operator, $value)->paginate($this->perPage());
+        return $this->getProduct()->where($key, $operator, $value)->paginate($this->perPage());
     }
+
+    public function findByCategoryId($id)
+    {
+        return $this->getProduct()->where('category_id', (int)$id)->paginate($this->perPage());
+    }
+
+
+    public function findByProductId($id)
+    {
+        return $this->getProduct()->where('id', (int)$id)->get()->first();
+    }
+
 
     public function delete($id)
     {
@@ -70,6 +82,7 @@ class EloquentBrandRepository implements BrandRepository
 
     public function create(array $data)
     {
+        
         return $this->getModel()->create($data);
     }
 }

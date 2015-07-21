@@ -50,9 +50,24 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
-        return view('index');
+        return view('home.index', [
+            'products'=>  $this->product->getAll()
+        ]);
     }
 
+    public function getContact()
+    {
+        return view('home.contact');
+    }
+
+    public function getAbout()
+    {
+        return view('home.about');
+    }
+    public function getRules()
+    {
+        return view('home.rules');
+    }
 
 
 }

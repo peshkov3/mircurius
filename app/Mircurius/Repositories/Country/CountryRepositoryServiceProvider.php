@@ -3,15 +3,15 @@
  * Created by IntelliJ IDEA.
  * User: peshkov
  * Date: 30.06.15
- * Time: 11:12
+ * Time: 11:09
  */
 
-namespace App\Mircurius\Repositories\Brand;
+namespace App\Mircurius\Repositories\Country;
 
 
 use Illuminate\Support\ServiceProvider;
 
-class BrandRepositoryServiceProvider extends ServiceProvider {
+class CountryRepositoryServiceProvider extends ServiceProvider {
 
     public function boot()
     {
@@ -25,8 +25,8 @@ class BrandRepositoryServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app->bind(
-            'App\Mircurius\Repositories\Brand\BrandRepository',
-            'App\Mircurius\Repositories\Brand\EloquentBrandRepository'
+            'App\Mircurius\Repositories\Product\ProductRepository',
+            'App\Mircurius\Repositories\Product\EloquentProductRepository'
         );
     }
 

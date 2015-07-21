@@ -1,5 +1,7 @@
 <?php namespace App\Commands;
 
+use App\Mircurius\Models\Country;
+use App\Mircurius\Repositories\Brand\BrandRepository;
 use App\Mircurius\Repositories\Category\CategoryRepository;
 use App\Mircurius\Repositories\Product\ProductRepository;
 use Illuminate\Console\Command;
@@ -15,14 +17,17 @@ class UpdateDB extends Command
 
     private $category;
     private $product;
+    private $brand;
 
 
-    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
+    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository, BrandRepository $brandRepository)
     {
         parent::__construct();
         $this->category = $categoryRepository;
         $this->product = $productRepository;
+        $this->brand = $brandRepository;
     }
+
     protected function getResponse($url){
 
         do{
@@ -38,6 +43,8 @@ class UpdateDB extends Command
 
         return (array)json_decode($json);
     }
+
+
     public function handle()
     {
         try {
@@ -45,6 +52,11 @@ class UpdateDB extends Command
 
             DB::connection('mongodb')->table('categories')->delete();
             DB::connection('mongodb')->table('products')->delete();
+            DB::connection('mongodb')->table('countries')->delete();
+            DB::connection('mongodb')->table('brand')->delete();
+
+            $this->saveAllBrands();
+            $this->saveAllCountries();
 
             File::deleteDirectory('public/mircurius/img');
 
@@ -70,10 +82,14 @@ class UpdateDB extends Command
 
             }
             \Illuminate\Support\Facades\Log::info("Categories for products were successfully updated");
+
+
         } catch (Exception $e) {
             dd($e);
         }
     }
+
+
     protected function saveCategory($id)
     {
         $v = Validator::make([
@@ -169,21 +185,21 @@ class UpdateDB extends Command
             }
         }
     }
+
     protected function getAndSaveCategoryProduct($category_id)
     {
-        $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?category_id=' . $category_id);
+        $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?expand=description,photo,category_id&category_id=' . $category_id);
         $_meta = (array)$products['_meta'];
         $pageCount = $_meta['pageCount'];
         $products = $products['items'];
         if ($pageCount > 1)
         {
             do{
-                $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?expand=photo&category_id=' . $category_id. '&page=' . $pageCount . '&per_page=50');
+                $products = $this->getResponse('https://www.sima-land.ru/api/v2/item?expand=description,photo,category_id&category_id=' . $category_id. '&page=' . $pageCount . '&per_page=50');
                 $products = $products['items'];
                 if (count($products) != 0){
                     foreach ($products as $product) {
                         $product=(array)$product;
-                        $product['category_id']=$category_id;
                         $this->product->create((array)$product);
                     }
                 }else{
@@ -195,14 +211,80 @@ class UpdateDB extends Command
         }else {
             if (count($products) != 0){
                 foreach ($products as $product) {
-
                     $product=(array)$product;
-                    $product['category_id']=$category_id;
                     $this->product->create((array)$product);
                 }
             }else {
                 \Illuminate\Support\Facades\Log::info("There is no product with category_id = ".$category_id);
                 $this->comment("There is no product with category_id = ".$category_id);
+            }
+        }
+    }
+
+    protected function saveAllBrands(){
+
+        $brands = $this->getResponse('https://www.sima-land.ru/api/v2/trademark');
+
+        $_meta = (array)$brands['_meta'];
+        $pageCount = $_meta['pageCount'];
+
+        $brands = $brands['items'];
+        if ($pageCount > 1) {
+            do {
+                $brands = $this->getResponse('https://www.sima-land.ru/api/v2/trademark?page=' . $pageCount . '&per_page=50');
+                $brands = $brands['items'];
+                if (count($brands) != 0) {
+                    foreach ($brands as $brand) {
+                        $asArray = (array)$brand;
+                        $this->brand->create($asArray);
+                    }
+                }
+                $pageCount--;
+            } while ($pageCount != 0);
+        }
+        else {
+            // store them to mongodb
+            if (count($brands) != 0)
+                foreach ($brands as $brand) {
+                    $asArray = (array)$brand;
+                    $this->brand->create($asArray);
+                }
+            else {
+                \Illuminate\Support\Facades\Log::info('There is no brand');
+                $this->comment("There is no brand");
+            }
+        }
+    }
+    protected function saveAllCountries(){
+        $countries = $this->getResponse('https://www.sima-land.ru/api/v2/settlement');
+
+        $_meta = (array)$countries['_meta'];
+        $pageCount = $_meta['pageCount'];
+
+        $countries = $countries['items'];
+        if ($pageCount > 1) {
+            do {
+                $countries = $this->getResponse('https://www.sima-land.ru/api/v2/settlement?page=' . $pageCount . '&per_page=50');
+                $countries = $countries['items'];
+                if (count($countries) != 0) {
+                    foreach ($countries as $country) {
+                        $asArray = (array)$country;
+                        Country::create($asArray);
+                    }
+                }
+                $pageCount--;
+            } while ($pageCount != 0);
+        }
+        else {
+            // store them to mongodb
+            if (count($countries) != 0)
+                foreach ($countries as $country) {
+                    $asArray = (array)$country;
+                    Country::create($asArray);
+                }
+            else {
+                \Illuminate\Support\Facades\Log::info('There is no brand');
+                $this->comment("There is no brand");
             }
         }
     }
