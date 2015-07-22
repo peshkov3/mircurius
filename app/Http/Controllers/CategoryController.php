@@ -62,6 +62,7 @@ class CategoryController extends Controller
     public function getList($one)
     {
 
+
         $id = $one;
 
         $v = Validator::make(['id' => $id], ['id' => 'required|integer']);
@@ -70,16 +71,19 @@ class CategoryController extends Controller
 
         $root_category = Category::where('id', (int)$id)->get()->first();
 
+        dd($root_category);
+
         try {
             $category = Category::where('root_id', (int)$id)->where('slug', '!=', $root_category->slug)->orderBy('name', 'DESC')->paginate(20);
+            return view('category.index', [
+                'root_category' => $root_category,
+                'categories' => $category
+            ]);
         }
         catch(\Exception $e){
-
+dd($e);
         }
-        return view('category.index', [
-            'root_category' => $root_category,
-            'categories' => $category
-        ]);
+
     }
 
     public function getView()

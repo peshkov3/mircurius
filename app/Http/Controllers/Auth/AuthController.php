@@ -23,8 +23,8 @@ class AuthController extends Controller
     protected $redirectTo = '/auth';
 
     // TODO: сделать редайрект на страницу просмотра информации после регистрации
-    protected $redirectPath = '/';
-    protected $loginPath = '/';
+    protected $redirectPath = 'user/profile';
+    protected $loginPath = '/auth/login';
 
 
     use AuthenticatesAndRegistersUsers;
@@ -144,7 +144,7 @@ class AuthController extends Controller
             return $this->redirectPath;
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/user/profile';
     }
 
     /**

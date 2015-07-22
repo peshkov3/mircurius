@@ -146,8 +146,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		
         
-          'Intervention\Image\ImageServiceProvider',
-               'Collective\Html\HtmlServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
 		
         
         'Pingpong\Admin\Providers\SupportServiceProvider',
@@ -157,12 +157,10 @@ return [
         'App\Mircurius\Repositories\Product\ProductRepositoryServiceProvider',
         'App\Mircurius\Repositories\Category\CategoryRepositoryServiceProvider',
         'App\Mircurius\Repositories\Brand\BrandRepositoryServiceProvider',
+        'App\Mircurius\Repositories\User\UserRepositoryServiceProvider',
         
         'App\Mircurius\Providers\MircuriusServiceProvider',
         'App\Mircurius\Providers\ObserverServiceProvider',
-     
-
-
 	],
 
 	/*

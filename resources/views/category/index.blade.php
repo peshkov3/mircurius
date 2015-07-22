@@ -42,7 +42,7 @@
                     @foreach($categories as $category)
                         <li><a href="{{url('product-by-category-id',$category->id)}}">{!! $category->name !!}</a></li>
                         <li class="pull-right"><a href="https://github.com/bbilginn/bootstrap-duallist"
-                                                  target="_blank"></a>
+                                         $user->photo         target="_blank"></a>
                         </li>
                     @endforeach
 

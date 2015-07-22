@@ -52,11 +52,11 @@ class UpdateDB extends Command
 
             DB::connection('mongodb')->table('categories')->delete();
             DB::connection('mongodb')->table('products')->delete();
-            DB::connection('mongodb')->table('countries')->delete();
-            DB::connection('mongodb')->table('brand')->delete();
+            //DB::connection('mongodb')->table('countries')->delete();
+            DB::connection('mongodb')->table('brands')->delete();
 
             $this->saveAllBrands();
-            $this->saveAllCountries();
+           // $this->saveAllCountries();
 
             File::deleteDirectory('public/mircurius/img');
 
