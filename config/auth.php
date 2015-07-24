@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
- 'model' => 'Pingpong\Admin\Entities\User',
+ 'model' => 'App\Mircurius\Models\User',
 	/*
 	|--------------------------------------------------------------------------
 	| Authentication Table

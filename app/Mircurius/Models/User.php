@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = \Hash::make($value);
+        $this->attributes['password'] = bcrypt($value);
     }
 
     /**
@@ -65,4 +65,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return $query->whereRaw($sql);
     }
+
+    public function manager()
+    {
+        return $this->belongsTo('UserManager');
+    }
+
+    public function clients()
+    {
+        return $this->hasMany('UserManager');
+    }
+
+
 }

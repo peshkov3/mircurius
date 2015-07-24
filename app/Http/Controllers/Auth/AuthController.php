@@ -23,7 +23,7 @@ class AuthController extends Controller
     protected $redirectTo = '/auth';
 
     // TODO: сделать редайрект на страницу просмотра информации после регистрации
-    protected $redirectPath = 'user/profile';
+    protected $redirectPath = '/';
     protected $loginPath = '/auth/login';
 
 
@@ -100,6 +100,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if ($this->auth->attempt($credentials, $request->has('remember'))) {
+
             return redirect()->intended($this->redirectPath());
         }
 

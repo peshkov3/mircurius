@@ -5,15 +5,10 @@
 @stop
 
 @section('content')
-    <div class="col-sm-3">
 
 
-        @include('partials.userMenu')
-        @yield('userMenu')
-
-    </div>
-
-    <div class="col-sm-9 padding-right">
+    <div class="col-sm-12">
+        <h2>{{$user->fio?$user->fio:$user->name}}</h2>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -26,6 +21,10 @@
                     <div class=" col-md-9 col-lg-9 ">
                         <table class="table table-user-information">
                             <tbody>
+                            <tr>
+                                <td>Логин</td>
+                                <td>{{$user->name}}</td>
+                            </tr>
                             <tr>
                                 <td>ФИО:</td>
                                 <td>{{$user->fio}}</td>
@@ -52,24 +51,15 @@
                                 <td>Email</td>
                                 <td>{{$user->email}}</td>
                             </tr>
-                            <tr>
-                                <td>Номер телефона:</td>
-                                <td>{{$user->phone_number}}
-                                </td>
+                            <td>Номер телефона:</td>
+                            <td>{{$user->phone_number}}
+                            </td>
 
                             </tr>
-                            <tr>
-                                <td>Ваш менеджер:</td>
-                                <td>
-                                </td>
-
-                            </tr>
-
 
                             </tbody>
                         </table>
 
-                        <a href="#" class="btn btn-primary">История покупок</a>
                     </div>
                 </div>
             </div>

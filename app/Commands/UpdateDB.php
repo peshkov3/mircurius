@@ -85,7 +85,7 @@ class UpdateDB extends Command
 
 
         } catch (Exception $e) {
-            dd($e);
+            \Illuminate\Support\Facades\Log::info($e);
         }
     }
 

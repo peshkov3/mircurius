@@ -18,7 +18,7 @@ Menu::create('user-menu', function ($userMenu) {
 
 
     $userMenu->route('user.history', 'История заказов');
-    $userMenu->route('user.password', 'Сменить пароль');
+    $userMenu->url('user/change-password', 'Сменить пароль');
     $userMenu->route('user.update', 'Редактировать');
     $userMenu->route('user.profile', 'Профиль');
 });

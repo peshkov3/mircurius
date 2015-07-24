@@ -9,6 +9,7 @@ return [
         'auth' => 'admin.auth',
         'guest' => 'admin.guest',
     ],
+    'default_manager_name'=>'gonabeme',
     'categories'=>[
         'items'=>['igrushki','tovary-dlya-detey','prazdniki'],
         'config' =>[
@@ -46,6 +47,10 @@ return [
     ],
     'brand' => [
         'model' => 'App\Mircurius\Models\Brand',
+        'perpage' => 10
+    ],
+    'user' => [
+        'model' => 'App\Mircurius\Models\User',
         'perpage' => 10
     ],
 ];

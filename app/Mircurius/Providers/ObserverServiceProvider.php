@@ -1,5 +1,7 @@
 <?php namespace App\Mircurius\Providers;
 
+use App\Mircurius\Models\User;
+use App\Mircurius\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Mircurius\Models\Product;
 
@@ -15,6 +17,7 @@ class ObserverServiceProvider extends ServiceProvider
    */
   public function boot()
   {
+    User::observe( new \App\Mircurius\Observers\UserObserver(new EloquentUserRepository()));
     Product::observe( new \App\Mircurius\Observers\ProductObserver() );
   }
 

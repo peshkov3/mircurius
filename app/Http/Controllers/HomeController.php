@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Mircurius\Models\User;
 use App\Mircurius\Repositories\Category\CategoryRepository;
 use App\Mircurius\Repositories\Product\ProductRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Input;
@@ -50,6 +53,18 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
+
+        if (Auth::attempt(['email'=>'peshkov1.max@gmail.com','password'=>'password'])) {
+dd('cvvcv');
+
+            return redirect()->intended($this->redirectPath());
+        }
+
+//        $user= User::find(3);
+//        $user->password =  Hash::make( 'password');
+//
+//        $user->save();
+//        dd(33);
         return view('home.index', [
             'products'=>  $this->product->getAll()
         ]);

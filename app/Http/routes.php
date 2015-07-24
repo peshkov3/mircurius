@@ -29,19 +29,28 @@ Route::get('category/{id}',  ['as' => 'category.view', 'uses' => 'CategoryContro
 
 Route::get('product-by-category-id/{category_id}',  ['as' => 'product.category_id', 'uses' => 'ProductController@getProductByCategoryId']);
 Route::get('product/{id}',  ['as' => 'product.view', 'uses' => 'ProductController@getProduct']);
-Route::get('order/{id}',  ['as' => 'order.index', 'uses' => 'OrderController@getOrder']);
+
+Route::get('manager',  ['as' => 'manager.view', 'uses' => 'ManagerController@getIndex']);
+
 
 // Доступ авторизованным пользователям
 Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@getIndex']);
 
     Route::get('user/profile', ['as' => 'user.profile', 'uses' => 'UserController@getProfile']);
     Route::post('user', ['as' => 'user.save', 'uses' => 'UserController@postUser']);
 
     Route::get('user/update', ['as' => 'user.form', 'uses' => 'UserController@getUpdate']);
-    Route::post('user/update', ['as' => 'user.update', 'uses' => 'UserController@getUpdate']);
+    Route::post('user/update', ['as' => 'user.update', 'uses' => 'UserController@postUpdate']);
 
-    Route::get('user/password', ['as' => 'user.password', 'uses' => 'UserController@getPassword']);
+    Route::get('user/change-password', ['as' => 'user.password', 'uses' => 'UserController@getChangePassword']);
+    Route::post('user/change-password', ['as' => 'user.password-reset', 'uses' => 'UserController@postChangePassword']);
+
 
     Route::get('user/history', ['as' => 'user.history', 'uses' => 'UserController@getHistory']);
+
+
+    Route::get('order',  ['as' => 'order.index', 'uses' => 'OrderController@getOrder']);
 
 });

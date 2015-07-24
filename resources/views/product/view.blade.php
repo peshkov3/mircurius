@@ -72,13 +72,13 @@
                     {{--<img src="{{asset('images/product-details/rating.png')}}" alt=""/>--}}
                     <span>
 									<span> Цена: {{round($product->price*1.2)}} тг.</span>
-									{{--<label>Quantity:</label>--}}
-									{{--<input type="text" value="3"/>--}}
+									<label>Quantity:</label>
+									<input type="text" value="3"/>
 
-											<a href="{{route('order.index')}}" class="btn btn-fefault cart">
+											<button id="order" class="btn btn-default cart">
                                                 <i class="fa fa-shopping-cart"></i>
                                                 Заказать
-                                            </a>
+                                            </button>
 								</span>
 
                     <p>Описание: {!! $product->description!!}</p>
@@ -453,5 +453,11 @@
 
 @section('script')
     <script src="{!! asset('js/main.js') !!}"></script>
+
+    <script>
+        $('#order').on('click', function(){
+            alert('sdcsdfs'):
+        })
+    </script>
 
 @stop
