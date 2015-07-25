@@ -22,7 +22,6 @@
                                                                         src="{{ $user->photo == '' ? asset('images/404/404.png') : asset($user->photo ) }}"
                                                                         class="img-circle img-responsive"></div>
 
-
                     <div class=" col-md-9 col-lg-9 ">
                         <table class="table table-user-information">
                             <tbody>
