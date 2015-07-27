@@ -50,21 +50,21 @@ class UpdateDB extends Command
         try {
 
 
-            DB::connection('mongodb')->table('categories')->delete();
-            DB::connection('mongodb')->table('products')->delete();
+           // DB::connection('mongodb')->table('categories')->delete();
+           // DB::connection('mongodb')->table('products')->delete();
             //DB::connection('mongodb')->table('countries')->delete();
-            DB::connection('mongodb')->table('brands')->delete();
+           // DB::connection('mongodb')->table('brands')->delete();
 
-            $this->saveAllBrands();
+          //  $this->saveAllBrands();
            // $this->saveAllCountries();
 
-            File::deleteDirectory('public/mircurius/img');
+           // File::deleteDirectory('public/mircurius/img');
 
             $categories = config('frontend.categories.items');
 
             foreach ($categories as $category_dev_name) {
 
-                $cat = $this->getResponse('https://www.sima-land.ru/api/v2/category?slug='.$category_dev_name);
+                $cat = $this->getResponse('https://www.sima-land.ru/api/v2/category?slug=tovary-dlya-detey');
 
                 $category = $cat['items'];
                 $category = (array)$category;

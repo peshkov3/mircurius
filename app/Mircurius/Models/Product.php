@@ -17,4 +17,9 @@ class Product extends Model {
         return $this->belongsTo('\App\Mircurius\Models\Category', 'category_id', 'root_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany('\App\Mircurius\Models\Order','product_id', 'id');
+    }
+
 }

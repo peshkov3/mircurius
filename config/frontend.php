@@ -53,4 +53,8 @@ return [
         'model' => 'App\Mircurius\Models\User',
         'perpage' => 10
     ],
+    'order' => [
+        'model' => 'App\Mircurius\Models\Order',
+        'perpage' => 10
+    ],
 ];

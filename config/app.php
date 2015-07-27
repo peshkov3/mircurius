@@ -158,6 +158,7 @@ return [
         'App\Mircurius\Repositories\Category\CategoryRepositoryServiceProvider',
         'App\Mircurius\Repositories\Brand\BrandRepositoryServiceProvider',
         'App\Mircurius\Repositories\User\UserRepositoryServiceProvider',
+        'App\Mircurius\Repositories\Order\OrderRepositoryServiceProvider',
         
         'App\Mircurius\Providers\MircuriusServiceProvider',
         'App\Mircurius\Providers\ObserverServiceProvider',

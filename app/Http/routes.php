@@ -51,6 +51,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('user/history', ['as' => 'user.history', 'uses' => 'UserController@getHistory']);
 
 
-    Route::get('order',  ['as' => 'order.index', 'uses' => 'OrderController@getOrder']);
+    Route::post('order/make',  ['as' => 'order.make', 'uses' => 'OrderController@postMake']);
 
 });

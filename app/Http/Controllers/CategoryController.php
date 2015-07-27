@@ -39,13 +39,9 @@ class CategoryController extends Controller
 
     public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, BrandRepository $brandRepository)
     {
-        //$this->middleware('auth');
-
         $this->product = $productRepository;
 
         $this->category = $categoryRepository;
-
-        //$this->$brand = $brandRepository;
     }
 
 
@@ -111,10 +107,7 @@ dd($e);
 
         if ($v->fails()) abort(400);
 
-
-//dd( Category::where('name', 'like', '%'.$query.'%')->get());
         dd($this->category->findBy('name','%'.$query.'%','like'));
-
 
         return view('category.index', [
             'root_category' => Product::where('id', (int)$id)->get()->first(),
